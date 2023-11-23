@@ -7,7 +7,7 @@ Process: [Main](../glossary.md#main-process)
 An example of implementing a protocol that has the same effect as the
 `file://` protocol:
 
-```javascript
+```js
 const { app, protocol, net } = require('electron')
 
 app.whenReady().then(() => {
@@ -31,7 +31,7 @@ a different session and your custom protocol will not work if you just use
 To have your custom protocol work in combination with a custom session, you need
 to register it to that session explicitly.
 
-```javascript
+```js
 const { app, BrowserWindow, net, protocol, session } = require('electron')
 const path = require('node:path')
 const url = require('url')
@@ -68,7 +68,7 @@ enable the capability.
 An example of registering a privileged scheme, that bypasses Content Security
 Policy:
 
-```javascript
+```js
 const { protocol } = require('electron')
 protocol.registerSchemesAsPrivileged([
   { scheme: 'foo', privileges: { bypassCSP: true } }
@@ -223,7 +223,7 @@ property.
 
 Example:
 
-```javascript
+```js
 protocol.registerBufferProtocol('atom', (request, callback) => {
   callback({ mimeType: 'text/html', data: Buffer.from('<h5>Response</h5>') })
 })
@@ -278,7 +278,7 @@ has the `data` property.
 
 Example:
 
-```javascript
+```js
 const { protocol } = require('electron')
 const { PassThrough } = require('stream')
 
@@ -303,7 +303,7 @@ protocol.registerStreamProtocol('atom', (request, callback) => {
 It is possible to pass any object that implements the readable stream API (emits
 `data`/`end`/`error` events). For example, here's how a file could be returned:
 
-```javascript
+```js
 protocol.registerStreamProtocol('atom', (request, callback) => {
   callback(fs.createReadStream('index.html'))
 })
