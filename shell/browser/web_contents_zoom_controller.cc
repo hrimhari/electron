@@ -278,12 +278,6 @@ void WebContentsZoomController::ResetZoomModeOnNavigationIfNeeded(
 
   event_data_ = std::make_unique<ZoomChangedEventData>(zoom_change_data);
 
-  // The call to ClearTemporaryZoomLevel() doesn't generate any events from
-  // HostZoomMap, but the call to UpdateState() in
-  // SetZoomFactorOnNavigationIfNeeded will notify our observers.
-  // Note: it's possible the render_process/frame ids have disappeared (e.g.
-  // if we navigated to a new origin), but this won't cause a problem in the
-  // call below.
   zoom_map->ClearTemporaryZoomLevel(
       web_contents()->GetPrimaryMainFrame()->GetGlobalId());
   zoom_mode_ = ZOOM_MODE_DEFAULT;

@@ -6,7 +6,6 @@
   const {ipcRenderer, webFrame} = require('electron')
   const view = document.getElementById('view')
   let finalNavigation = false
-
   view.addEventListener('dom-ready', () => {
     if (!finalNavigation && !view.canGoBack()) {
       view.setZoomLevel(2.0)
@@ -14,7 +13,6 @@
     const zoomLevel = view.getZoomLevel()
     const zoomFactor = view.getZoomFactor()
     ipcRenderer.send('webview-zoom-level', zoomLevel, zoomFactor, view.canGoBack(), finalNavigation)
-
     if (!view.canGoBack() && !finalNavigation) {
       view.src = 'app://host2'
     } else if (!finalNavigation) {
